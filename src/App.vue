@@ -1,16 +1,12 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <NewGame />
+  <RouterView></RouterView>
 </template>
 
 <script>
-import NewGame from './components/NewGame.vue';
 
 export default {
   name: 'App',
-  components: {
-    NewGame
-  }
 }
 </script>
 
