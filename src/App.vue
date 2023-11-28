@@ -1,15 +1,12 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+  <img class="mt-14 mx-auto" alt="Vue logo" src="./assets/logo.png">
   <RouterView></RouterView>
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+:root {
+  @apply md:text-[18px] text-[16px];
+  @apply antialiased;
+  @apply text-slate-700 dark:text-slate-300 bg-neutral-100 dark:bg-black;
 }
 </style>
