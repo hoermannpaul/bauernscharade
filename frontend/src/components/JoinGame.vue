@@ -1,3 +1,15 @@
+<script setup>
+import { ref } from 'vue';
+
+
+const webSocket = new WebSocket('ws://localhost:8080?room=asdf');
+
+webSocket.onmessage = (message) => {
+  console.debug(message);
+};
+
+</script>
+
 <template>
   <div>
     <h1>Code eingeben</h1>
