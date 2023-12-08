@@ -14,7 +14,7 @@ const gameCode = ref("XY23Z1")
         <button>Link kopieren</button>
     </div>
     <div>
-        <button>Weiter</button>
+        <router-link to="/configuregame">Weiter</router-link>
     </div>
   </div>
 </template>

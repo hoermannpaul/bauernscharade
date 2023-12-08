@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1>Create New Game</h1>
+    <h1>Spielen</h1>
     <div>
-        <router-link to="/startgame">create game</router-link>
+        <router-link to="/startgame">Spiel erstellen</router-link>
     </div>
     <div>
-        <router-link to="/joingame">join game</router-link>
+        <router-link to="/joingame">Spiel beitreten</router-link>
     </div>
   </div>
 </template>

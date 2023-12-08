@@ -10,7 +10,7 @@
         <input type="text" />
     </div>
     <div>
-        <button>Beitreten</button>
+        <router-link to="/waitingroom">Weiter</router-link>
     </div>
   </div>
 </template>
