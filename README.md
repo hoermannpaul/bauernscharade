@@ -5,6 +5,12 @@
 npm install
 ```
 
+### Run the server
+Global node dependencies required: `ts-node` (`npm install -g ts-node`).
+```
+ts-node src/server.ts
+```
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
