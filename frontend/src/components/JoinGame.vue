@@ -1,12 +1,7 @@
 <script setup>
-import { ref } from 'vue';
+import { activeConnection } from '../store'
 
-
-const webSocket = new WebSocket('ws://localhost:8080?room=asdf');
-
-webSocket.onmessage = (message) => {
-  console.debug(message);
-};
+activeConnection.connect("asdf")
 
 </script>
 
@@ -17,6 +12,7 @@ webSocket.onmessage = (message) => {
         <h5>Code</h5>
         <input type="text" />
     </div>
+    <button v-on:click="() => {activeConnection.send('test')}">Test</button>
     <div>
         <h5>Name</h5>
         <input type="text" />
