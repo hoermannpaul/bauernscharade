@@ -10,12 +10,6 @@
   </div>
 </template>
 
-<script>
-export default {
-    name: "NewGame"
-}
-</script>
-
 <style>
 
 </style>
