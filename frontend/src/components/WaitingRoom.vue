@@ -6,9 +6,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { store } from '../store';
+// import { computed } from 'vue';
+// import { useStore } from 'vuex';
 
-const players=ref(["Herbert", "Günther"])
+// const store = useStore();
+// const players = computed(() => store.state.players);
+
+console.log("Players in WaitingRoom:", store.players);
+const players = store.players
+
 </script>
 
 <style>

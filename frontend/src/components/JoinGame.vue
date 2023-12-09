@@ -1,7 +1,23 @@
 <script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { activeConnection } from '../store'
+//import { store }  from '../store'
 
-activeConnection.connect("asdf")
+
+const roomName = ref('');
+const playerName = ref('');
+const router = useRouter();
+const connectWebSocket = () => { 
+  activeConnection.connect(roomName.value);
+};
+
+const connectAndNavigate = () => {
+  const message = JSON.stringify({ type: 'newPlayer', name: playerName.value });
+  activeConnection.send(message);
+  router.push('/waitingroom');
+};
+
 
 </script>
 
@@ -9,16 +25,18 @@ activeConnection.connect("asdf")
   <div>
     <h1>Code eingeben</h1>
     <div>
-        <h5>Code</h5>
-        <input type="text" />
+        <h5 class="code">Code</h5>
+        <input type="text" v-model="roomName" />
+        <button @click="connectWebSocket">Verbinden</button>
     </div>
     <button v-on:click="() => {activeConnection.send('test')}">Test</button>
     <div>
         <h5>Name</h5>
-        <input type="text" />
+        <input type="text" v-model="playerName" />
     </div>
     <div>
-        <router-link to="/waitingroom">Weiter</router-link>
+        <button @click="connectAndNavigate">Weiter</button>
+        <!-- <router-link to="/waitingroom">Weiter</router-link> -->
     </div>
   </div>
 </template>

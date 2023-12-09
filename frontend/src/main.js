@@ -9,6 +9,7 @@ import JoinGame from './components/JoinGame.vue'
 import NewGame from './components/NewGame.vue'
 import WaitingRoom from './components/WaitingRoom.vue'
 import ConfigureGame from './components/ConfigureGame.vue'
+// import { store } from './store';
 
 const routes = [
   { path: '/', component: NewGame },
@@ -26,6 +27,7 @@ const router = createRouter({
 const app = createApp(App)
 
 app.use(router)
+// app.use(store)
 
 app.mount('#app')
 

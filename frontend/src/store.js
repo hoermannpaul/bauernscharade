@@ -1,3 +1,9 @@
-import { ServerConnection } from "./serverConnection"
+import { reactive } from 'vue';
+import { ServerConnection } from "./serverConnection";
 
-export const activeConnection = new ServerConnection()
+export const store = reactive({
+  players: []
+});
+
+
+export const activeConnection = new ServerConnection();
