@@ -13,8 +13,9 @@ const connectWebSocket = () => {
 };
 
 const connectAndNavigate = () => {
-  const message = JSON.stringify({ type: 'newPlayer', name: playerName.value });
-  activeConnection.send(message);
+  // player und admin in addPlayer nur weil ich nicht weiß
+  //ob wir noch wo unterscheiden müssen zwischen admin und player
+  activeConnection.addPlayer('player', playerName.value);
   router.push('/waitingroom');
 };
 

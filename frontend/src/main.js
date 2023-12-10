@@ -9,7 +9,10 @@ import JoinGame from './components/JoinGame.vue'
 import NewGame from './components/NewGame.vue'
 import WaitingRoom from './components/WaitingRoom.vue'
 import ConfigureGame from './components/ConfigureGame.vue'
-// import { store } from './store';
+import AddWords from './components/AddWords.vue';
+
+import Playroom from './components/Playroom.vue'
+
 
 const routes = [
   { path: '/', component: NewGame },
@@ -17,6 +20,9 @@ const routes = [
   { path: '/startgame', component: StartGame },
   { path: '/waitingroom', component: WaitingRoom },
   { path: '/configuregame', component: ConfigureGame },
+  { path: '/addwords', component: AddWords },
+  { path: '/playroom', component: Playroom },
+
 ]
 
 const router = createRouter({
@@ -27,7 +33,6 @@ const router = createRouter({
 const app = createApp(App)
 
 app.use(router)
-// app.use(store)
 
 app.mount('#app')
 

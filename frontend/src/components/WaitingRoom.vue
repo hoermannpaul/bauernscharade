@@ -1,3 +1,18 @@
+<script setup>
+  import { store } from '../store';
+  import { watch } from 'vue';
+  import { useRouter } from 'vue-router';
+
+  const router = useRouter();
+
+  watch(() => store.currentRoute, (newRoute) => {
+    if (newRoute) {
+        router.push(newRoute);
+    }
+  }, { immediate: true }); 
+
+</script>
+
 <template>
   <div>
     <h3>Warteraum</h3>
@@ -5,9 +20,6 @@
   </div>
 </template>
 
-<script setup>
-import { store } from '../store';
-</script>
 
 <style>
 

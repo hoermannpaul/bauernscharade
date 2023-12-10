@@ -1,10 +1,19 @@
 import { reactive } from 'vue';
 import { ServerConnection } from "./serverConnection";
 
+
 export const store = reactive({
     players: [],
-    overwrite(players) {
+    words: [],
+    currentRoute: null,
+    setCurrentRoute(route) {
+        this.currentRoute = route;
+    },
+    overwritePlayers(players) {
         this.players = players
+    },
+    overwriteWords(newWords) {
+        this.words = newWords;
     }
 });
 

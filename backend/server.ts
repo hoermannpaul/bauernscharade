@@ -15,6 +15,8 @@ const wss = new ws.WebSocketServer({ server });
 
 const players: Record<string, string[]> = {};
 
+const words: Record<string, string[]> = {};
+
 wss.on('connection', (ws, request) => {
     const paramString = request.url?.split("?").slice(-1)[0]
     const paramKeyValues = paramString?.split("&") || []
@@ -51,10 +53,24 @@ wss.on('connection', (ws, request) => {
 
         if (message.type === 'newPlayer' || message.type === 'adminPlayer') {
             players[currentRoom] = players[currentRoom] || [];
-            players[currentRoom].push(message.name);
+            players[currentRoom].push(message.value);
             const playerListMessage = JSON.stringify({ type: 'playerList', players: players[currentRoom] })
             aliveRooms[currentRoom].forEach(connection => { connection.send(playerListMessage); });
         };
+
+        if (message.type === "addWord") {
+            words[currentRoom] = words[currentRoom] || [];
+            for (let value of message.value) {
+                words[currentRoom].push(value);
+            }
+            const wordList = JSON.stringify({ type: 'wordList', words: words[currentRoom] })
+            aliveRooms[currentRoom].forEach(connection => { connection.send(wordList); })
+        }
+
+        if (message.type === 'startGame') {
+            const navigateMessage = JSON.stringify({ type: 'navigate', component: 'AddWords' });
+            aliveRooms[currentRoom].forEach(connection => { connection.send(navigateMessage); });
+          }
     });
 });
 server.listen(8080)
