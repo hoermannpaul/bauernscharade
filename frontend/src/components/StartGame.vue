@@ -8,6 +8,13 @@ const gameCode = ref("");
 const adminName = ref('');
 const router = useRouter();
 
+const copyMessage = ref("");
+
+const generateAndConnect = () => {
+  generateRandomString();
+  activeConnection.connect(gameCode.value);
+}
+
 const generateRandomString = () => {
   const stringLength = 4; 
   const randomStr = generatedRandom(stringLength);
@@ -21,17 +28,24 @@ const connectAndNavigate = () => {
   router.push('/configuregame');
 };
 
+const copyToClipboard = async () => {
+    await navigator.clipboard.writeText(gameCode.value);
+    copyMessage.value = "Gamecode kopiert!";
+    setTimeout(() => copyMessage.value = "", 3000);
+};
+
 </script>
 
 <template>
   <div>
     <h2>Code</h2>
     <div>
-      <button @click="generateRandomString">Generiere Gamecode</button>
+      <button @click="generateAndConnect">Generiere Gamecode</button>
       <h4>{{ gameCode }}</h4>
     </div>
     <div>
-        <button @click="activeConnection.connect(gameCode);">Link kopieren</button>
+        <button @click="copyToClipboard">Link kopieren</button>
+        <div v-if="copyMessage">{{ copyMessage }}</div>
     </div>
     <div>
       <h5>Name</h5>

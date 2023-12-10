@@ -25,6 +25,11 @@ class ServerConnection {
                 store.setCurrentRoute('/addwords');
             }
 
+            if (data.type === 'teamUpdate') {
+                console.debug("Updating team in store:", data.players);
+                store.addPlayerToTeam(data.players, data.team);
+            }
+
         };
 
         this.webSocket = webSocket
@@ -57,6 +62,16 @@ class ServerConnection {
 
     subscribeWordChange(callback) {
         this.subscribers["wordChange"] = callback
+    }
+
+    addToTeam(playerName, team) {
+        let message = '';
+        if(team === 'A'){
+            message = JSON.stringify({ type: 'updateTeamA', value: playerName });
+        } else if (team === 'B') {
+            message = JSON.stringify({ type: 'updateTeamB', value: playerName });
+        }
+        this.webSocket.send(message);
     }
 }
 

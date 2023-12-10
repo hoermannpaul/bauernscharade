@@ -14,8 +14,9 @@ const aliveRooms: Record<string, ws[]> = {};
 const wss = new ws.WebSocketServer({ server });
 
 const players: Record<string, string[]> = {};
-
 const words: Record<string, string[]> = {};
+const TeamA: Record<string, string[]> = {};
+const TeamB: Record<string, string[]> = {};
 
 wss.on('connection', (ws, request) => {
     const paramString = request.url?.split("?").slice(-1)[0]
@@ -54,7 +55,7 @@ wss.on('connection', (ws, request) => {
         if (message.type === 'newPlayer' || message.type === 'adminPlayer') {
             players[currentRoom] = players[currentRoom] || [];
             players[currentRoom].push(message.value);
-            const playerListMessage = JSON.stringify({ type: 'playerList', players: players[currentRoom] })
+            const playerListMessage = JSON.stringify({ type: 'playerList', players: players[currentRoom] });
             aliveRooms[currentRoom].forEach(connection => { connection.send(playerListMessage); });
         };
 
@@ -70,7 +71,21 @@ wss.on('connection', (ws, request) => {
         if (message.type === 'startGame') {
             const navigateMessage = JSON.stringify({ type: 'navigate', component: 'AddWords' });
             aliveRooms[currentRoom].forEach(connection => { connection.send(navigateMessage); });
-          }
+        }
+
+        if (message.type === 'updateTeamA') {
+            TeamA[currentRoom] = TeamA[currentRoom] || [];
+            TeamA[currentRoom].push(message.value);
+            const TeamUpdate = JSON.stringify({ type: 'teamUpdate', players: TeamA[currentRoom], team: 'A'});
+            aliveRooms[currentRoom].forEach(connection => { connection.send(TeamUpdate); });
+        }
+
+        if (message.type === 'updateTeamB') {
+            TeamB[currentRoom] = TeamB[currentRoom] || [];
+            TeamB[currentRoom].push(message.value);
+            const TeamUpdate = JSON.stringify({ type: 'teamUpdate', players: TeamB[currentRoom], team: 'B'});
+            aliveRooms[currentRoom].forEach(connection => { connection.send(TeamUpdate); });
+        }
     });
 });
 server.listen(8080)

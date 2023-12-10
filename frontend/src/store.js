@@ -6,6 +6,17 @@ export const store = reactive({
     players: [],
     words: [],
     currentRoute: null,
+    teamA: [],
+    teamB: [],
+    addPlayerToTeam(player, team) {
+        if (team === 'A') {
+            console.log("add A: ", player);
+            this.teamA = player;
+        } else if (team === 'B') {
+            console.log("add B: ", player);
+            this.teamB = player;
+        }
+    },
     setCurrentRoute(route) {
         this.currentRoute = route;
     },

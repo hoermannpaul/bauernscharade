@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { activeConnection } from '../store'
 import { useRouter } from 'vue-router';
+import { store } from '../store';
 
   const router = useRouter();
 
@@ -23,6 +24,20 @@ import { useRouter } from 'vue-router';
 
 <template>
   <div>
+    <div class="teams">
+      <div>
+        <h2>Team A</h2>
+        <ul>
+          <li v-for="player in store.teamA" :key="player">{{ player }}</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Team B</h2>
+        <ul>
+          <li v-for="player in store.teamB" :key="player">{{ player }}</li>
+        </ul>
+      </div>
+    </div>
     <div>words: {{ words }}</div>
     <h1>Wörter eingeben</h1>
     <input type="text" v-model="word1" @input="addWordsToArray"/> <br> <br>
@@ -35,4 +50,14 @@ import { useRouter } from 'vue-router';
 </template>
 <style>
 
+h2 {
+  font-style: bold;
+  font-size: 30px;
+}
+
+.teams {
+  border: 2px solid grey;
+  display: inline-block;
+  padding: 10px 100px 10px 10px;
+}
 </style>
