@@ -12,6 +12,7 @@ import ConfigureGame from './components/ConfigureGame.vue'
 import AddWords from './components/AddWords.vue';
 
 import Playroom from './components/Playroom.vue'
+import CurrentRound from './components/CurrentRound.vue'
 
 
 const routes = [
@@ -22,7 +23,7 @@ const routes = [
   { path: '/configuregame', component: ConfigureGame },
   { path: '/addwords', component: AddWords },
   { path: '/playroom', component: Playroom },
-
+  { path: '/play', component: CurrentRound },
 ]
 
 const router = createRouter({

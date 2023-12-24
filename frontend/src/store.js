@@ -4,6 +4,10 @@ import { ServerConnection } from "./serverConnection";
 
 export const store = reactive({
     players: [],
+    currentPlayerIndex: 0,
+    myName: "",
+    currentlyPlaying: false,
+    currentlyGuessing: false,
     words: [],
     currentRoute: null,
     teamA: [],
