@@ -37,7 +37,7 @@ class ServerConnection {
 
     send(message) {
         this.webSocket.send(message)
-    }
+    } 
 
     addPlayer(playertype, playerName) {
         let message = '';
