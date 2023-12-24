@@ -17,7 +17,8 @@ const players: Record<string, string[]> = {};
 const words: Record<string, string[]> = {};
 const TeamA: Record<string, string[]> = {};
 const TeamB: Record<string, string[]> = {};
-let cur_time: number;
+let curTime: number;
+let pauseTime: number;
 
 wss.on('connection', (ws, request) => {
     const paramString = request.url?.split("?").slice(-1)[0]
@@ -88,10 +89,16 @@ wss.on('connection', (ws, request) => {
             aliveRooms[currentRoom].forEach(connection => { connection.send(TeamUpdate); });
         }
 
-        if (message.type === "startRound") {
-            cur_time[currentRoom] = message.time;
-            const TimeMessage = JSON.stringify({ type: 'timeUpdate', time: cur_time[currentRoom]});
+        if (message.type === 'startRound') {
+            curTime[currentRoom] = message.time;
+            const TimeMessage = JSON.stringify({ type: 'timeUpdate', time: curTime[currentRoom]});
             aliveRooms[currentRoom].forEach(connection => { connection.send(TimeMessage);});
+        }
+
+        if(message.type === 'pauseGame') {
+            pauseTime[currentRoom] = message.time;
+            const PauseMessage = JSON.stringify({ type: 'pauseTimeUpdate', time: pauseTime[currentRoom]});
+            aliveRooms[currentRoom].forEach(connection => { connection.send(PauseMessage);});
         }
     });
 });

@@ -32,7 +32,12 @@ class ServerConnection {
 
             if (data.type === 'timeUpdate') {
                 console.debug("Updating time in store:", data.time);
-                store.time = data.time;
+                store.startTime = data.time;
+            }
+
+            if (data.type === 'pauseTimeUpdate') {
+                console.debug("Updating Pause Time in store:", data.time);
+                store.pauseTime = data.time;
             }
 
         };
@@ -80,6 +85,11 @@ class ServerConnection {
 
     startRound(startTime) {
         const message = JSON.stringify({ type: 'startRound', time: startTime});
+        this.webSocket.send(message);
+    }
+
+    pauseGame(stopTime) {
+        const message = JSON.stringify({ type: 'pauseGame', time: stopTime});
         this.webSocket.send(message);
     }
 }

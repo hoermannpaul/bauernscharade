@@ -8,7 +8,8 @@ export const store = reactive({
     currentRoute: null,
     teamA: [],
     teamB: [],
-    time: 0.0,
+    startTime: 0.0,
+    pauseTime: 0.0,
     addPlayerToTeam(player, team) {
         if (team === 'A') {
             console.log("add A: ", player);
