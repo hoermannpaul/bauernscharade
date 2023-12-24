@@ -8,6 +8,7 @@ export const store = reactive({
     currentRoute: null,
     teamA: [],
     teamB: [],
+    time: 0.0,
     addPlayerToTeam(player, team) {
         if (team === 'A') {
             console.log("add A: ", player);
@@ -25,7 +26,7 @@ export const store = reactive({
     },
     overwriteWords(newWords) {
         this.words = newWords;
-    }
+    },
 });
 
 

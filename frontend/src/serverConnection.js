@@ -30,6 +30,11 @@ class ServerConnection {
                 store.addPlayerToTeam(data.players, data.team);
             }
 
+            if (data.type === 'timeUpdate') {
+                console.debug("Updating time in store:", data.time);
+                store.time = data.time;
+            }
+
         };
 
         this.webSocket = webSocket
@@ -56,7 +61,6 @@ class ServerConnection {
 
     addWord(word) {
         const message = JSON.stringify({ type: 'addWord', value: word});
-        console.log(word);
         this.webSocket.send(message);
     }
 
@@ -71,6 +75,11 @@ class ServerConnection {
         } else if (team === 'B') {
             message = JSON.stringify({ type: 'updateTeamB', value: playerName });
         }
+        this.webSocket.send(message);
+    }
+
+    startRound(startTime) {
+        const message = JSON.stringify({ type: 'startRound', time: startTime});
         this.webSocket.send(message);
     }
 }
